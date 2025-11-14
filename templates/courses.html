@@ -1,0 +1,1027 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Courses - CodeZ | Learn Programming for Kids & Beginners</title>
+    
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary-color: #6C63FF;
+            --secondary-color: #4ECDC4;
+            --dark-color: #2D3436;
+            --light-bg: #F8F9FE;
+            --text-muted: #636e72;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--dark-color);
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Space Grotesk', sans-serif;
+        }
+
+        /* Navigation */
+        .navbar {
+            padding: 1rem 0;
+            background: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            transition: all 0.3s;
+        }
+
+        .navbar-brand {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary-color) !important;
+            font-family: 'Space Grotesk', sans-serif;
+        }
+
+        .nav-link {
+            color: var(--dark-color) !important;
+            font-weight: 500;
+            margin: 0 0.8rem;
+            transition: color 0.3s;
+        }
+
+        .nav-link:hover,
+        .nav-link.active {
+            color: var(--primary-color) !important;
+        }
+
+        .btn-primary-custom {
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 0.6rem 1.8rem;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s;
+            text-decoration: none;
+        }
+
+        .btn-primary-custom:hover {
+            background: #5549e0;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(108, 99, 255, 0.3);
+            color: white;
+        }
+
+        /* Page Header */
+        .page-header {
+            padding: 140px 0 80px;
+            background: linear-gradient(135deg, #F8F9FE 0%, #EEF2FF 100%);
+            text-align: center;
+        }
+
+        .page-header h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--dark-color);
+        }
+
+        .page-header p {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            max-width: 600px;
+            margin: 0 auto 2rem;
+        }
+
+        /* Filter Section */
+        .filter-section {
+            padding: 40px 0;
+            background: white;
+            border-bottom: 1px solid #e8e8e8;
+        }
+
+        .filter-btn {
+            padding: 0.5rem 1.5rem;
+            border-radius: 50px;
+            border: 2px solid #e8e8e8;
+            background: white;
+            color: var(--dark-color);
+            font-weight: 500;
+            transition: all 0.3s;
+            margin: 0.3rem;
+        }
+
+        .filter-btn:hover,
+        .filter-btn.active {
+            border-color: var(--primary-color);
+            background: var(--primary-color);
+            color: white;
+        }
+
+        /* Courses Section */
+        .courses-section {
+            padding: 60px 0;
+            background: white;
+        }
+
+        .course-card {
+            background: white;
+            border-radius: 16px;
+            overflow: hidden;
+            transition: all 0.3s;
+            height: 100%;
+            border: 1px solid #e8e8e8;
+            cursor: pointer;
+        }
+
+        .course-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+        }
+
+        .course-image {
+            height: 180px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .course-image i {
+            font-size: 3.5rem;
+            color: white;
+        }
+
+        .course-badge {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: white;
+            color: var(--primary-color);
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .course-badge.new {
+            background: #FF6B6B;
+            color: white;
+        }
+
+        .course-badge.popular {
+            background: #FFD93D;
+            color: var(--dark-color);
+        }
+
+        .course-body {
+            padding: 1.5rem;
+        }
+
+        .course-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .course-desc {
+            color: var(--text-muted);
+            margin-bottom: 1rem;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .course-info {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .course-info-item {
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        .course-info-item i {
+            color: var(--secondary-color);
+        }
+
+        .course-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 1rem;
+            border-top: 1px solid #f0f0f0;
+        }
+
+        .course-level {
+            color: var(--secondary-color);
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .course-level.intermediate {
+            color: #FF9F40;
+        }
+
+        .course-level.advanced {
+            color: #FF6B6B;
+        }
+
+        .course-price {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+
+        /* Category Badge */
+        .category-badge {
+            display: inline-block;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .category-badge.programming {
+            background: rgba(108, 99, 255, 0.1);
+            color: var(--primary-color);
+        }
+
+        .category-badge.web {
+            background: rgba(255, 107, 107, 0.1);
+            color: #FF6B6B;
+        }
+
+        .category-badge.game {
+            background: rgba(255, 159, 64, 0.1);
+            color: #FF9F40;
+        }
+
+        .category-badge.mobile {
+            background: rgba(78, 205, 196, 0.1);
+            color: var(--secondary-color);
+        }
+
+        /* CTA Section */
+        .cta {
+            padding: 80px 0;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-align: center;
+        }
+
+        .cta h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .cta p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.95;
+        }
+
+        .btn-white {
+            background: white;
+            color: var(--primary-color);
+            border: none;
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-white:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            color: var(--primary-color);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark-color);
+            color: white;
+            padding: 50px 0 30px;
+        }
+
+        .footer-logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 1rem;
+            font-family: 'Space Grotesk', sans-serif;
+        }
+
+        .footer-desc {
+            color: rgba(255,255,255,0.7);
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .footer-links h6 {
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .footer-links ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-links a {
+            color: rgba(255,255,255,0.7);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: white;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 0.8rem;
+            margin-top: 1rem;
+        }
+
+        .social-icons a {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .social-icons a:hover {
+            background: var(--primary-color);
+            transform: translateY(-3px);
+        }
+
+        .footer-bottom {
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            text-align: center;
+            color: rgba(255,255,255,0.6);
+            font-size: 0.9rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .page-header h1 {
+                font-size: 2.3rem;
+            }
+
+            .page-header {
+                padding: 120px 0 60px;
+            }
+
+            .filter-section {
+                padding: 30px 0;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .page-header h1 {
+                font-size: 2rem;
+            }
+            
+            .navbar-brand {
+                font-size: 1.5rem;
+            }
+
+            .cta h2 {
+                font-size: 2rem;
+            }
+        }
+
+        /* Animations */
+        .fade-in-up {
+            animation: fadeInUp 0.6s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg">
+        <div class="container">
+            <a class="navbar-brand" href="{% url 'home' %}">CodeZ</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto align-items-center">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'home' %}#home">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="{% url 'courses' %}">Courses</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'home' %}#features">Features</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'about' %}">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'home' %}#contact">Contact</a>
+                    </li>
+                    <li class="nav-item ms-3">
+                        <a href="{% url 'courses' %}" class="btn-primary-custom">Start Learning</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1 class="fade-in-up">All Courses</h1>
+            <p class="fade-in-up">Explore our complete collection of programming courses designed for kids and beginners</p>
+        </div>
+    </section>
+
+    <!-- Filter Section -->
+    <section class="filter-section">
+        <div class="container">
+            <div class="text-center">
+                <button class="filter-btn active" data-filter="all">All Courses</button>
+                <button class="filter-btn" data-filter="beginner">Beginner</button>
+                <button class="filter-btn" data-filter="intermediate">Intermediate</button>
+                <button class="filter-btn" data-filter="advanced">Advanced</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Courses Section -->
+    <section class="courses-section">
+        <div class="container">
+            <div class="row g-4" id="coursesGrid">
+                <!-- Python for Kids -->
+                <div class="col-md-6 col-lg-4 course-item" data-level="beginner">
+                    <div class="course-card">
+                        <div class="course-image" style="background: linear-gradient(135deg, #3498db, #2ecc71);">
+                            <i class="bi bi-filetype-py"></i>
+                            <span class="course-badge popular">Popular</span>
+                        </div>
+                        <div class="course-body">
+                            <span class="category-badge programming">Programming</span>
+                            <h5 class="course-title">Python for Kids</h5>
+                            <p class="course-desc">Learn Python through fun projects and games. Perfect for absolute beginners aged 8-14.</p>
+                            <div class="course-info">
+                                <span class="course-info-item">
+                                    <i class="bi bi-clock"></i> 8 weeks
+                                </span>
+                                <span class="course-info-item">
+                                    <i class="bi bi-book"></i> 24 lessons
+                                </span>
+                                <span class="course-info-item">
+                                    <i class="bi bi-people"></i> Ages 8-14
+                                </span>
+                            </div>
+                            <div class="course-meta">
+                                <span class="course-level">
+                                    <i class="bi bi-bar-chart-fill me-1"></i>Beginner
+                                </span>
+                                <span class="course-price">₹970</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Web Design Basics -->
+                <div class="col-md-6 col-lg-4 course-item" data-level="beginner">
+                    <div class="course-card">
+                        <div class="course-image" style="background: linear-gradient(135deg, #e74c3c, #f39c12);">
+                            <i class="bi bi-code-slash"></i>
+                            <span class="course-badge new">New</span>
+                        </div>
+                        <div class="course-body">
+                            <span class="category-badge web">Web Development</span>
+                            <h5 class="course-title">Web Design Basics</h5>
+                            <p class="course-desc">Create your first website with HTML & CSS. Build colorful and interactive pages.</p>
+                            <div class="course-info">
+                                <span class="course-info-item">
+                                    <i class="bi bi-clock"></i> 6 weeks
+                                </span>
+                                <span class="course-info-item">
+                                    <i class="bi bi-book"></i> 18 lessons
+                                </span>
+                                <span class="course-info-item">
+                                    <i class="bi bi-people"></i> Ages 10+
+                                </span>
+                            </div>
+                            <div class="course-meta">
+                                <span class="course-level">
+                                    <i class="bi bi-bar-chart-fill me-1"></i>Beginner
+                                </span>
+                                <span class="course-price">₹970</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Game Development -->
+                <div class="col-md-6 col-lg-4 course-item" data-level="beginner">
+                    <div class="course-card">
+                        <div class="course-image" style="background: linear-gradient(135deg, #9b59b6, #e91e63);">
+                            <i class="bi bi-joystick"></i>
+                        </div>
+                        <div class="course-body">
+                            <span class="category-badge game">Game Design</span>
+                            <h5 class="course-title">Game Development with Scratch</h5>
+                            <p class="course-desc">Build your own games using Scratch. Learn game logic and design principles.</p>
+                            <div class="course-info">
+                                <span class="course-info-item">
+                                    <i class="bi bi-clock"></i> 7 weeks
+                                </span>
+                                <span class="course-info-item">
+                                    <i class="bi bi-book"></i> 21 lessons
+                                </span>
+                                <span class="course-info-item">
+                                    <i class="bi bi-people"></i> Ages 8-12
+                                </span>
+                            </div>
+                            <div class="course-meta">
+                                <span class="course-level">
+                                    <i class="bi bi-bar-chart-fill me-1"></i>Beginner
+                                </span>
+                                <span class="course-price">₹1940</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- JavaScript Fun -->
+                <div class="col-md-6 col-lg-4 course-item" data-level="intermediate">
+                    <div class="course-card">
+                        <div class="course-image" style="background: linear-gradient(135deg, #00d2ff, #3a7bd5);">
+                            <i class="bi bi-braces"></i>
+                        </div>
+                        <div class="course-body">
+                            <span class="category-badge web">Web Development</span>
+                            <h5 class="course-title">JavaScript for Beginners</h5>
+                            <p class="course-desc">Make websites interactive with JavaScript. Create animations and mini-games!</p>
+                            <div class="course-info">
+                                <span class="course-info-item">
+                                    <i class="bi bi-clock"></i> 10 weeks
+                                </span>
+                                <span class="course-info-item">
+                                    <i class="bi bi-book"></i> 30 lessons
+                                </span>
+                                <span class="course-info-item">
+                                    <i class="bi bi-people"></i> Ages 12+
+                                </span>
+                            </div>
+                            <div class="course-meta">
+                                <span class="course-level intermediate">
+                                    <i class="bi bi-bar-chart-fill me-1"></i>Intermediate
+                                </span>
+                                <span class="course-price">₹1940</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Mobile Apps -->
+                <div class="col-md-6 col-lg-4 course-item" data-level="intermediate">
+                    <div class="course-card">
+                        <div class="course-image" style="background: linear-gradient(135deg, #fc4a1a, #f7b733);">
+                            <i class="bi bi-phone"></i>
+                        </div>
+                        <div class="course-body">
+                            <span class="category-badge mobile">Mobile Development</span>
+                            <h5 class="course-title">Mobile App Basics</h5>
+                            <p class="course-desc">Build your first mobile app! Learn the basics of app development.</p>
+                            <div class="course-info">
+                                <span class="course-info-item">
+                                    <i class="bi bi-clock"></i> 12 weeks
+                                </span>
+                                <span class="course-info-item">
+                                    <i class="bi bi-book"></i> 36 lessons
+                                </span>
+                                <span class="course-info-item">
+                                    <i class="bi bi-people"></i> Ages 13+
+                                </span>
+                            </div>
+                            <div class="course-meta">
+                                <span class="course-level intermediate">
+                                    <i class="bi bi-bar-chart-fill me-1"></i>Intermediate
+                                </span>
+                                <span class="course-price">₹1940</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- AI for Kids -->
+                <div class="col-md-6 col-lg-4 course-item" data-level="advanced">
+                    <div class="course-card">
+                        <div class="course-image" style="background: linear-gradient(135deg, #11998e, #38ef7d);">
+                            <i class="bi bi-robot"></i>
+                        </div>
+                        <div class="course-body">
+                            <span class="category-badge programming">Programming</span>
+                            <h5 class="course-title">AI for Kids</h5>
+                            <p class="course-desc">Introduction to artificial intelligence and machine learning concepts.</p>
+                            <div class="course-info">
+                                <span class="course-info-item">
+                                    <i class="bi bi-clock"></i> 10 weeks
+                                </span>
+                                <span class="course-info-item">
+                                    <i class="bi bi-book"></i> 30 lessons
+                                </span>
+                                <span class="course-info-item">
+                                    <i class="bi bi-people"></i> Ages 14+
+                                </span>
+                            </div>
+                            <div class="course-meta">
+                                <span class="course-level advanced">
+                                    <i class="bi bi-bar-chart-fill me-1"></i>Advanced
+                                </span>
+                                <span class="course-price">₹2910</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Roblox Game Creation -->
+                <div class="col-md-6 col-lg-4 course-item" data-level="beginner">
+                    <div class="course-card">
+                        <div class="course-image" style="background: linear-gradient(135deg, #ff0844, #ffb199);">
+                            <i class="bi bi-controller"></i>
+                            <span class="course-badge popular">Popular</span>
+                        </div>
+                        <div class="course-body">
+                            <span class="category-badge game">Game Design</span>
+                            <h5 class="course-title">Roblox Game Creation</h5>
+                            <p class="course-desc">Create your own Roblox games using Lua programming. Design fun worlds!</p>
+                            <div class="course-info">
+                                <span class="course-info-item">
+                                    <i class="bi bi-clock"></i> 8 weeks
+                                </span>
+                                <span class="course-info-item">
+                                    <i class="bi bi-book"></i> 24 lessons
+                                </span>
+                                <span class="course-info-item">
+                                    <i class="bi bi-people"></i> Ages 9-14
+                                </span>
+                            </div>
+                            <div class="course-meta">
+                                <span class="course-level">
+                                    <i class="bi bi-bar-chart-fill me-1"></i>Beginner
+                                </span>
+                                <span class="course-price">₹970</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Minecraft Coding -->
+                <div class="col-md-6 col-lg-4 course-item" data-level="beginner">
+                    <div class="course-card">
+                        <div class="course-image" style="background: linear-gradient(135deg, #56ab2f, #a8e063);">
+                            <i class="bi bi-box"></i>
+                            <span class="course-badge new">New</span>
+                        </div>
+                        <div class="course-body">
+                            <span class="category-badge game">Game Design</span>
+                            <h5 class="course-title">Minecraft Coding</h5>
+                            <p class="course-desc">Learn programming through Minecraft! Code your own mods and adventures.</p>
+                            <div class="course-info">
+                                <span class="course-info-item">
+                                    <i class="bi bi-clock"></i> 6 weeks
+                                </span>
+                                <span class="course-info-item">
+                                    <i class="bi bi-book"></i> 18 lessons
+                                </span>
+                                <span class="course-info-item">
+                                    <i class="bi bi-people"></i> Ages 8-12
+                                </span>
+                            </div>
+                            <div class="course-meta">
+                                <span class="course-level">
+                                    <i class="bi bi-bar-chart-fill me-1"></i>Beginner
+                                </span>
+                                <span class="course-price">₹970</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Animation & Art -->
+                <div class="col-md-6 col-lg-4 course-item" data-level="beginner">
+                    <div class="course-card">
+                        <div class="course-image" style="background: linear-gradient(135deg, #f857a6, #ff5858);">
+                            <i class="bi bi-palette"></i>
+                        </div>
+                        <div class="course-body">
+                            <span class="category-badge web">Web Development</span>
+                            <h5 class="course-title">Digital Animation</h5>
+                            <p class="course-desc">Create animations using code! Learn CSS animations and SVG graphics.</p>
+                            <div class="course-info">
+                                <span class="course-info-item">
+                                    <i class="bi bi-clock"></i> 6 weeks
+                                </span>
+                                <span class="course-info-item">
+                                    <i class="bi bi-book"></i> 18 lessons
+                                </span>
+                                <span class="course-info-item">
+                                    <i class="bi bi-people"></i> Ages 10+
+                                </span>
+                            </div>
+                            <div class="course-meta">
+                                <span class="course-level">
+                                    <i class="bi bi-bar-chart-fill me-1"></i>Beginner
+                                </span>
+                                <span class="course-price">₹970</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Data Science for Kids -->
+                <div class="col-md-6 col-lg-4 course-item" data-level="intermediate">
+                    <div class="course-card">
+                        <div class="course-image" style="background: linear-gradient(135deg, #4568dc, #b06ab3);">
+                            <i class="bi bi-graph-up"></i>
+                        </div>
+                        <div class="course-body">
+                            <span class="category-badge programming">Programming</span>
+                            <h5 class="course-title">Data Science Basics</h5>
+                            <p class="course-desc">Explore data science concepts! Learn to analyze and visualize data with Python.</p>
+                            <div class="course-info">
+                                <span class="course-info-item">
+                                    <i class="bi bi-clock"></i> 9 weeks
+                                </span>
+                                <span class="course-info-item">
+                                    <i class="bi bi-book"></i> 27 lessons
+                                </span>
+                                <span class="course-info-item">
+                                    <i class="bi bi-people"></i> Ages 13+
+                                </span>
+                            </div>
+                            <div class="course-meta">
+                                <span class="course-level intermediate">
+                                    <i class="bi bi-bar-chart-fill me-1"></i>Intermediate
+                                </span>
+                                <span class="course-price">₹1940</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Cybersecurity Basics -->
+                <div class="col-md-6 col-lg-4 course-item" data-level="intermediate">
+                    <div class="course-card">
+                        <div class="course-image" style="background: linear-gradient(135deg, #141e30, #243b55);">
+                            <i class="bi bi-shield-check"></i>
+                        </div>
+                        <div class="course-body">
+                            <span class="category-badge programming">Programming</span>
+                            <h5 class="course-title">Cybersecurity for Kids</h5>
+                            <p class="course-desc">Learn about online safety and basic cybersecurity concepts in a fun way.</p>
+                            <div class="course-info">
+                                <span class="course-info-item">
+                                    <i class="bi bi-clock"></i> 6 weeks
+                                </span>
+                                <span class="course-info-item">
+                                    <i class="bi bi-book"></i> 18 lessons
+                                </span>
+                                <span class="course-info-item">
+                                    <i class="bi bi-people"></i> Ages 11+
+                                </span>
+                            </div>
+                            <div class="course-meta">
+                                <span class="course-level intermediate">
+                                    <i class="bi bi-bar-chart-fill me-1"></i>Intermediate
+                                </span>
+                                <span class="course-price">₹1940</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 3D Design & Modeling -->
+                <div class="col-md-6 col-lg-4 course-item" data-level="intermediate">
+                    <div class="course-card">
+                        <div class="course-image" style="background: linear-gradient(135deg, #667db6, #0082c8);">
+                            <i class="bi bi-box-seam"></i>
+                        </div>
+                        <div class="course-body">
+                            <span class="category-badge game">Game Design</span>
+                            <h5 class="course-title">3D Design & Modeling</h5>
+                            <p class="course-desc">Create 3D models and designs. Learn Blender basics for games and animation.</p>
+                            <div class="course-info">
+                                <span class="course-info-item">
+                                    <i class="bi bi-clock"></i> 10 weeks
+                                </span>
+                                <span class="course-info-item">
+                                    <i class="bi bi-book"></i> 30 lessons
+                                </span>
+                                <span class="course-info-item">
+                                    <i class="bi bi-people"></i> Ages 12+
+                                </span>
+                            </div>
+                            <div class="course-meta">
+                                <span class="course-level intermediate">
+                                    <i class="bi bi-bar-chart-fill me-1"></i>Intermediate
+                                </span>
+                                <span class="course-price">₹1940</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta">
+        <div class="container">
+            <h2>Can't Decide? We're Here to Help!</h2>
+            <p>Contact our team to find the perfect course for your learning journey</p>
+            <a href="{% url 'home' %}#contact" class="btn-white">Get in Touch</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 mb-4 mb-lg-0">
+                    <h3 class="footer-logo">CodeZ</h3>
+                    <p class="footer-desc">Empowering the next generation with programming skills through fun and interactive learning.</p>
+                    <div class="social-icons">
+                        <a href="#" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
+                        <a href="#" aria-label="Twitter"><i class="bi bi-twitter"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
+                        <a href="#" aria-label="YouTube"><i class="bi bi-youtube"></i></a>
+                    </div>
+                </div>
+                
+                <div class="col-lg-2 col-md-4 mb-4 mb-lg-0">
+                    <div class="footer-links">
+                        <h6>Quick Links</h6>
+                        <ul>
+                            <li><a href="{% url 'about' %}">About Us</a></li>
+                            <li><a href="{% url 'courses' %}">Courses</a></li>
+                            <li><a href="{% url 'home' %}#features">Features</a></li>
+                            <li><a href="#">Pricing</a></li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="col-lg-2 col-md-4 mb-4 mb-lg-0">
+                    <div class="footer-links">
+                        <h6>Courses</h6>
+                        <ul>
+                            <li><a href="{% url 'courses' %}">Python</a></li>
+                            <li><a href="{% url 'courses' %}">Web Design</a></li>
+                            <li><a href="{% url 'courses' %}">JavaScript</a></li>
+                            <li><a href="{% url 'courses' %}">Game Dev</a></li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="col-lg-2 col-md-4 mb-4 mb-lg-0">
+                    <div class="footer-links">
+                        <h6>Support</h6>
+                        <ul>
+                            <li><a href="#">Help Center</a></li>
+                            <li><a href="{% url 'home' %}#contact">Contact Us</a></li>
+                            <li><a href="#">FAQ</a></li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="col-lg-2">
+                    <div class="footer-links">
+                        <h6>Legal</h6>
+                        <ul>
+                            <li><a href="#">Privacy Policy</a></li>
+                            <li><a href="#">Terms of Service</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2024 CodeZ. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Custom JS -->
+    <script>
+        // Navbar scroll effect
+        window.addEventListener('scroll', function() {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.style.boxShadow = '0 4px 20px rgba(0,0,0,0.1)';
+            } else {
+                navbar.style.boxShadow = '0 2px 10px rgba(0,0,0,0.05)';
+            }
+        });
+
+        // Filter functionality
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        const courseItems = document.querySelectorAll('.course-item');
+
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', function() {
+                // Remove active class from all buttons
+                filterBtns.forEach(b => b.classList.remove('active'));
+                // Add active class to clicked button
+                this.classList.add('active');
+
+                const filterValue = this.getAttribute('data-filter');
+
+                courseItems.forEach(item => {
+                    if (filterValue === 'all') {
+                        item.style.display = 'block';
+                        setTimeout(() => {
+                            item.classList.add('fade-in-up');
+                        }, 100);
+                    } else {
+                        if (item.getAttribute('data-level') === filterValue) {
+                            item.style.display = 'block';
+                            setTimeout(() => {
+                                item.classList.add('fade-in-up');
+                            }, 100);
+                        } else {
+                            item.style.display = 'none';
+                        }
+                    }
+                });
+            });
+        });
+
+        // Animation on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('fade-in-up');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.course-card').forEach(el => {
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>

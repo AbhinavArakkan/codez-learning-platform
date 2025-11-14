@@ -1,0 +1,830 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CodeZ - Learn Programming for Kids & Beginners</title>
+    
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary-color: #6C63FF;
+            --secondary-color: #4ECDC4;
+            --dark-color: #2D3436;
+            --light-bg: #F8F9FE;
+            --text-muted: #636e72;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--dark-color);
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Space Grotesk', sans-serif;
+        }
+
+        /* Navigation */
+        .navbar {
+            padding: 1rem 0;
+            background: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            transition: all 0.3s;
+        }
+
+        .navbar-brand {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary-color) !important;
+            font-family: 'Space Grotesk', sans-serif;
+        }
+
+        .nav-link {
+            color: var(--dark-color) !important;
+            font-weight: 500;
+            margin: 0 0.8rem;
+            transition: color 0.3s;
+        }
+
+        .nav-link:hover,
+        .nav-link.active {
+            color: var(--primary-color) !important;
+        }
+
+        .btn-primary-custom {
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 0.6rem 1.8rem;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s;
+            text-decoration: none;
+        }
+
+        .btn-primary-custom:hover {
+            background: #5549e0;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(108, 99, 255, 0.3);
+            color: white;
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 140px 0 80px;
+            background: linear-gradient(135deg, #F8F9FE 0%, #EEF2FF 100%);
+            position: relative;
+        }
+
+        .hero-title {
+            font-size: 3.2rem;
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 1.5rem;
+            color: var(--dark-color);
+        }
+
+        .hero-title .highlight {
+            color: var(--primary-color);
+        }
+
+        .hero-subtitle {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+            line-height: 1.7;
+        }
+
+        .hero-image img {
+            width: 100%;
+            max-width: 550px;
+            height: auto;
+        }
+
+        .badge-info {
+            background: rgba(108, 99, 255, 0.1);
+            color: var(--primary-color);
+            padding: 0.4rem 1rem;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            display: inline-block;
+            margin-bottom: 1rem;
+        }
+
+        .hero-features {
+            margin-top: 2rem;
+        }
+
+        .hero-features span {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            margin-right: 1.5rem;
+        }
+
+        .hero-features i {
+            color: #27ae60;
+            margin-right: 0.3rem;
+        }
+
+        /* Courses Section */
+        .courses {
+            padding: 80px 0;
+            background: white;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+
+        .section-subtitle {
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .course-card {
+            background: white;
+            border-radius: 16px;
+            overflow: hidden;
+            transition: all 0.3s;
+            height: 100%;
+            border: 1px solid #e8e8e8;
+        }
+
+        .course-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+        }
+
+        .course-image {
+            height: 180px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .course-image i {
+            font-size: 3.5rem;
+            color: white;
+        }
+
+        .course-badge {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: white;
+            color: var(--primary-color);
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .course-body {
+            padding: 1.5rem;
+        }
+
+        .course-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .course-desc {
+            color: var(--text-muted);
+            margin-bottom: 1rem;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .course-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 1rem;
+            border-top: 1px solid #f0f0f0;
+        }
+
+        .course-level {
+            color: var(--secondary-color);
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .course-price {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+
+        /* Features Section */
+        .features {
+            padding: 80px 0;
+            background: var(--light-bg);
+        }
+
+        .feature-box {
+            text-align: center;
+            padding: 2rem 1rem;
+        }
+
+        .feature-icon {
+            width: 70px;
+            height: 70px;
+            border-radius: 16px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            background: white;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+
+        .feature-icon.purple { color: var(--primary-color); }
+        .feature-icon.teal { color: var(--secondary-color); }
+        .feature-icon.red { color: #FF6B6B; }
+        .feature-icon.orange { color: #FF9F40; }
+
+        .feature-box h5 {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .feature-box p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        /* CTA Section */
+        .cta {
+            padding: 80px 0;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-align: center;
+        }
+
+        .cta h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .cta p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.95;
+        }
+
+        .btn-white {
+            background: white;
+            color: var(--primary-color);
+            border: none;
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-white:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            color: var(--primary-color);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark-color);
+            color: white;
+            padding: 50px 0 30px;
+        }
+
+        .footer-logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 1rem;
+            font-family: 'Space Grotesk', sans-serif;
+        }
+
+        .footer-desc {
+            color: rgba(255,255,255,0.7);
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .footer-links h6 {
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .footer-links ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-links a {
+            color: rgba(255,255,255,0.7);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: white;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 0.8rem;
+            margin-top: 1rem;
+        }
+
+        .social-icons a {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .social-icons a:hover {
+            background: var(--primary-color);
+            transform: translateY(-3px);
+        }
+
+        .footer-bottom {
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            text-align: center;
+            color: rgba(255,255,255,0.6);
+            font-size: 0.9rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.3rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1.1rem;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .hero {
+                padding: 120px 0 60px;
+            }
+
+            .hero-image {
+                margin-top: 2rem;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .hero-title {
+                font-size: 2rem;
+            }
+            
+            .navbar-brand {
+                font-size: 1.5rem;
+            }
+
+            .cta h2 {
+                font-size: 2rem;
+            }
+
+            .hero-features span {
+                display: block;
+                margin-bottom: 0.5rem;
+            }
+        }
+
+        /* Animations */
+        .fade-in-up {
+            animation: fadeInUp 0.6s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg">
+        <div class="container">
+            <a class="navbar-brand" href="#">CodeZ</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto align-items-center">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#home">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#courses">Courses</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#features">Features</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'about' %}">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#contact">Contact</a>
+                    </li>
+                    <li class="nav-item ms-3">
+                        <a href="#courses" class="btn-primary-custom">Start Learning</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6 fade-in-up">
+                    <span class="badge-info">
+                        <i class="bi bi-star-fill me-1"></i>New Platform for 2025
+                    </span>
+                    <h1 class="hero-title">Learn <span class="highlight">Coding</span> the Fun Way</h1>
+                    <p class="hero-subtitle">
+                        Interactive programming courses designed for kids and beginners. Start your tech journey with expert guidance and hands-on projects.
+                    </p>
+                    <div class="d-flex gap-3 flex-wrap">
+                        <a href="#courses" class="btn-primary-custom btn-lg">
+                            Browse Courses
+                        </a>
+                        <a href="#features" class="btn btn-outline-secondary btn-lg" style="border-radius: 50px;">
+                            Learn More
+                        </a>
+                    </div>
+                    <div class="hero-features">
+                        <span><i class="bi bi-check-circle-fill"></i>Free trial available</span>
+                        <span><i class="bi bi-check-circle-fill"></i>Certificate included</span>
+                    </div>
+                </div>
+                <div class="col-lg-6 hero-image text-center">
+                    <svg viewBox="0 0 500 400" xmlns="http://www.w3.org/2000/svg" style="max-width: 100%; height: auto;">
+                        <!-- Computer -->
+                        <rect x="100" y="80" width="300" height="200" rx="10" fill="#6C63FF" opacity="0.1"/>
+                        <rect x="110" y="90" width="280" height="180" rx="5" fill="white" stroke="#E0E0E0" stroke-width="2"/>
+                        
+                        <!-- Code Lines -->
+                        <rect x="130" y="110" width="60" height="8" rx="4" fill="#6C63FF"/>
+                        <rect x="200" y="110" width="40" height="8" rx="4" fill="#4ECDC4"/>
+                        <rect x="250" y="110" width="30" height="8" rx="4" fill="#FF6B6B"/>
+                        
+                        <rect x="130" y="135" width="80" height="8" rx="4" fill="#4ECDC4"/>
+                        <rect x="220" y="135" width="50" height="8" rx="4" fill="#6C63FF"/>
+                        
+                        <rect x="130" y="160" width="40" height="8" rx="4" fill="#FF6B6B"/>
+                        <rect x="180" y="160" width="90" height="8" rx="4" fill="#6C63FF"/>
+                        
+                        <rect x="130" y="185" width="120" height="8" rx="4" fill="#4ECDC4"/>
+                        
+                        <!-- Character -->
+                        <circle cx="250" cy="240" r="25" fill="#FFD93D"/>
+                        <circle cx="242" cy="235" r="3" fill="#2D3436"/>
+                        <circle cx="258" cy="235" r="3" fill="#2D3436"/>
+                        <path d="M 240 250 Q 250 258 260 250" stroke="#2D3436" stroke-width="2" fill="none"/>
+                        
+                        <!-- Keyboard -->
+                        <rect x="120" y="290" width="260" height="50" rx="5" fill="#F0F0F0"/>
+                        <rect x="130" y="300" width="240" height="30" rx="3" fill="white"/>
+                        
+                        <!-- Decorative Elements -->
+                        <circle cx="80" cy="100" r="6" fill="#6C63FF" opacity="0.5"/>
+                        <circle cx="420" cy="120" r="8" fill="#4ECDC4" opacity="0.5"/>
+                        <circle cx="90" cy="340" r="5" fill="#FF6B6B" opacity="0.5"/>
+                        <circle cx="410" cy="300" r="4" fill="#FFD93D" opacity="0.7"/>
+                    </svg>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Courses Section -->
+    <section class="courses" id="courses">
+        <div class="container">
+            <h2 class="section-title">Featured Courses</h2>
+            <p class="section-subtitle">Start your coding journey with our beginner-friendly courses</p>
+            
+            <div class="row g-4">
+                <div class="col-md-6 col-lg-4">
+                    <div class="course-card">
+                        <div class="course-image" style="background: linear-gradient(135deg, #3498db, #2ecc71);">
+                            <i class="bi bi-filetype-py"></i>
+                            <span class="course-badge">Popular</span>
+                        </div>
+                        <div class="course-body">
+                            <h5 class="course-title">Python for Kids</h5>
+                            <p class="course-desc">Learn Python through fun projects and games. Perfect for absolute beginners aged 8-14.</p>
+                            <div class="course-meta">
+                                <span class="course-level">
+                                    <i class="bi bi-bar-chart-fill me-1"></i>Beginner
+                                </span>
+                                <span class="course-price">₹970</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-6 col-lg-4">
+                    <div class="course-card">
+                        <div class="course-image" style="background: linear-gradient(135deg, #e74c3c, #f39c12);">
+                            <i class="bi bi-code-slash"></i>
+                            <span class="course-badge">New</span>
+                        </div>
+                        <div class="course-body">
+                            <h5 class="course-title">Web Design Basics</h5>
+                            <p class="course-desc">Create your first website with HTML & CSS. Build colorful and interactive pages.</p>
+                            <div class="course-meta">
+                                <span class="course-level">
+                                    <i class="bi bi-bar-chart-fill me-1"></i>Beginner
+                                </span>
+                                <span class="course-price">₹970</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-6 col-lg-4">
+                    <div class="course-card">
+                        <div class="course-image" style="background: linear-gradient(135deg, #9b59b6, #e91e63);">
+                            <i class="bi bi-joystick"></i>
+                        </div>
+                        <div class="course-body">
+                            <h5 class="course-title">Game Development</h5>
+                            <p class="course-desc">Build your own games using Scratch. Learn game logic and design principles.</p>
+                            <div class="course-meta">
+                                <span class="course-level">
+                                    <i class="bi bi-bar-chart-fill me-1"></i>Beginner
+                                </span>
+                                <span class="course-price">₹1940</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-5">
+                <a href="{% url 'courses' %}" class="btn-primary-custom btn-lg">View All Courses</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features" id="features">
+        <div class="container">
+            <h2 class="section-title">Why Choose CodeZ?</h2>
+            <p class="section-subtitle">Everything you need to start your coding journey</p>
+            
+            <div class="row g-4">
+                <div class="col-md-6 col-lg-3">
+                    <div class="feature-box">
+                        <div class="feature-icon purple">
+                            <i class="bi bi-controller"></i>
+                        </div>
+                        <h5>Fun Learning</h5>
+                        <p>Learn through engaging games and interactive challenges</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="feature-box">
+                        <div class="feature-icon teal">
+                            <i class="bi bi-person-check"></i>
+                        </div>
+                        <h5>Expert Teachers</h5>
+                        <p>Learn from experienced instructors who love teaching</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="feature-box">
+                        <div class="feature-icon red">
+                            <i class="bi bi-trophy"></i>
+                        </div>
+                        <h5>Certificates</h5>
+                        <p>Earn certificates as you complete courses</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="feature-box">
+                        <div class="feature-icon orange">
+                            <i class="bi bi-chat-dots"></i>
+                        </div>
+                        <h5>Live Support</h5>
+                        <p>Get help whenever you need from our support team</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta">
+        <div class="container">
+            <h2>Ready to Start Learning?</h2>
+            <p>Join CodeZ today and unlock your coding potential!</p>
+            <a href="#courses" class="btn-white">Get Started Free</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 mb-4 mb-lg-0">
+                    <h3 class="footer-logo">CodeZ</h3>
+                    <p class="footer-desc">Empowering the next generation with programming skills through fun and interactive learning.</p>
+                    <div class="social-icons">
+                        <a href="#" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
+                        <a href="#" aria-label="Twitter"><i class="bi bi-twitter"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
+                        <a href="#" aria-label="YouTube"><i class="bi bi-youtube"></i></a>
+                    </div>
+                </div>
+                
+                <div class="col-lg-2 col-md-4 mb-4 mb-lg-0">
+                    <div class="footer-links">
+                        <h6>Quick Links</h6>
+                        <ul>
+                            <li><a href="#">About Us</a></li>
+                            <li><a href="#courses">Courses</a></li>
+                            <li><a href="#features">Features</a></li>
+                            <li><a href="#">Pricing</a></li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="col-lg-2 col-md-4 mb-4 mb-lg-0">
+                    <div class="footer-links">
+                        <h6>Courses</h6>
+                        <ul>
+                            <li><a href="#">Python</a></li>
+                            <li><a href="#">Web Design</a></li>
+                            <li><a href="#">JavaScript</a></li>
+                            <li><a href="#">Game Dev</a></li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="col-lg-2 col-md-4 mb-4 mb-lg-0">
+                    <div class="footer-links">
+                        <h6>Support</h6>
+                        <ul>
+                            <li><a href="#">Help Center</a></li>
+                            <li><a href="#">Contact Us</a></li>
+                            <li><a href="#">FAQ</a></li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="col-lg-2">
+                    <div class="footer-links">
+                        <h6>Legal</h6>
+                        <ul>
+                            <li><a href="#">Privacy Policy</a></li>
+                            <li><a href="#">Terms of Service</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2024 CodeZ. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Custom JS -->
+    <script>
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', function() {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.style.boxShadow = '0 4px 20px rgba(0,0,0,0.1)';
+            } else {
+                navbar.style.boxShadow = '0 2px 10px rgba(0,0,0,0.05)';
+            }
+        });
+
+        // Active navigation
+        function updateActiveNav() {
+            const sections = document.querySelectorAll('section[id]');
+            const navLinks = document.querySelectorAll('.nav-link');
+            
+            let currentSection = '';
+            const scrollPosition = window.scrollY + 100;
+            
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.offsetHeight;
+                
+                if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
+                    currentSection = section.getAttribute('id');
+                }
+            });
+            
+            if (window.scrollY < 100) {
+                currentSection = 'home';
+            }
+            
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href').includes('#' + currentSection)) {
+                    link.classList.add('active');
+                }
+            });
+        }
+
+        window.addEventListener('scroll', updateActiveNav);
+        document.addEventListener('DOMContentLoaded', updateActiveNav);
+
+        // Animation on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('fade-in-up');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.course-card, .feature-box').forEach(el => {
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
